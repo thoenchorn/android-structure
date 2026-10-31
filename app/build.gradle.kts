@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -27,21 +28,23 @@ android {
     flavorDimensions += "env"
 
     productFlavors {
+        // All flavors point at the same public demo API for now; replace the uat/prp hosts
+        // with your real backends and keep the rest of the wiring unchanged.
         create("dev") {
             dimension = "env"
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
-            buildConfigField("String", "API_BASE_URL", "\"https://api-dev.example.com/\"")
+            buildConfigField("String", "API_BASE_URL", "\"https://jsonplaceholder.typicode.com/\"")
         }
         create("uat") {
             dimension = "env"
             applicationIdSuffix = ".uat"
             versionNameSuffix = "-uat"
-            buildConfigField("String", "API_BASE_URL", "\"https://api-uat.example.com/\"")
+            buildConfigField("String", "API_BASE_URL", "\"https://jsonplaceholder.typicode.com/\"")
         }
         create("prp") {
             dimension = "env"
-            buildConfigField("String", "API_BASE_URL", "\"https://api.example.com/\"")
+            buildConfigField("String", "API_BASE_URL", "\"https://jsonplaceholder.typicode.com/\"")
         }
     }
 
@@ -50,7 +53,6 @@ android {
             signingConfig = signingConfigs.getByName("debug")
             optimization {
                 enable = true
-                packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
             }
         }
     }
@@ -65,6 +67,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.core)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
@@ -72,6 +75,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.json)
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

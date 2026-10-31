@@ -10,9 +10,6 @@ class AndroidStructureApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        container = AppContainer(
-            environment = BuildConfig.FLAVOR,
-            baseUrl = BuildConfig.API_BASE_URL,
-        )
+        container = AppContainer(baseUrl = BuildConfig.API_BASE_URL)
     }
 }

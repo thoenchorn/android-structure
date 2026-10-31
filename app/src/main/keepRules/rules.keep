@@ -10,3 +10,13 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+# kotlinx.serialization
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.**
+-keepclassmembers class com.thoen.androidstructure.**$$serializer { *; }
+-keepclassmembers @kotlinx.serialization.Serializable class com.thoen.androidstructure.** {
+    *** Companion;
+}
+-keepclasseswithmembers class com.thoen.androidstructure.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}

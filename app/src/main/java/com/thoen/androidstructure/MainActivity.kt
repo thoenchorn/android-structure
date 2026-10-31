@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidStructureTheme {
                 val viewModel: MainViewModel =
-                    viewModel(factory = MainViewModel.factory(container.getGreetingUseCase))
+                    viewModel(factory = MainViewModel.factory(container.getTodosUseCase))
                 MainScreen(viewModel = viewModel)
             }
         }
