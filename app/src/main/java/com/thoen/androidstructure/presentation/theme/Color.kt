@@ -1,4 +1,4 @@
-package com.thoen.androidstructure.ui.theme
+package com.thoen.androidstructure.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
