@@ -1,0 +1,7 @@
+{
+  // The Kotlin Language Server (fwcd.kotlin) cannot build this project's classpath: its
+  // Gradle init script relies on the legacy `getBootClasspath()`/`applicationVariants` APIs
+  // that AGP 9 removed, and its injected tasks also conflict with the configuration cache.
+  // Gradle compiles the project fine, so suppress the resulting false diagnostics.
+  "kotlin.diagnostics.enabled": false
+}
